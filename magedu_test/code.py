@@ -688,11 +688,59 @@ for i in range(length-1):
     for j in range(i+1, length):
         if a[j] > a[maxindex]:
             maxindex = j
-    a[i], a[maxindex] = a[maxindex], a[i]
+    if maxindex != i:   # 当最大数的index与i相同时，即表示不需要进行交换
+        a[i], a[maxindex] = a[maxindex], a[i]
 print(a)
 '''
+# 简单交换排序升级===找最大值得同时，也找最小值，一个正索引查找，一个负索引查找
+'''
+import random
+a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
+random.shuffle(a)
+print(a)
+length = len(a)
+for i in range(length//2):  #  迭代数值减半
+    maxindex = i
+    minindex = -i-1
+    for j in range(i+1, length-i):  # 尾部区间为length-i====j的取值为列表的正负两段不断减少
+        if a[j] > a[maxindex]:
+            maxindex = j
+        if a[-j-1] < a[minindex]:
+            minindex = -j-1
+    if a[maxindex] == a[minindex]:      # 当某趟后发现，最大值和最小值相等，则表示剩余数字相等
+        break
+    if maxindex != i:
+        a[i], a[maxindex] = a[maxindex], a[i]
+        if minindex == i - length:   # 当找最大值时，出现当前交换的是最小值时，增加判断
+            minindex = maxindex - length
+    if minindex != -i-1:
+        a[-i-1], a[minindex] = a[minindex], a[-i-1]
+print(a)
+'''
+# 从下面链接中找出 .gz 结尾的链接，并将符合要求链接的文件名按顺序输出。（提示：最终要的是.gz结尾的包名，例如coreutils-6.11.tar.gz ）
+'''
+urls = '
+# mirrors.kernel.org/gnu/coreutils/coreutils-6.11.tar.gz 
+# mirrors.kernel.org/gnu/bash/bash-5.0.tar.gz
+# www.baidu.com/ 
+# www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.1.2/hadoop-3.1.2-src.tar.gz 
+# apache.org/dist/hbase/2.1.4/api_compare_2.1.3_to_2.1.4RC1.html
+# www.apache.org/dyn/closer.lua/hbase/2.1.4/hbase-2.1.4-src.tar.gz
+# tomcat.apache.org/download-90.cgi 
+# mirrors.kernel.org/gnu/grub/grub-2.02.tar.xz 
+# mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-9/v9.0.19/bin/apache-tomcat-9.0.19-fulldocs.tar.gz 
+# archive.apache.org/dist/zookeeper/current/zookeeper-3.4.14.tar.gz 
+# hub.docker.com/editions/community/docker-ce-desktop-mac 
+# home.firefoxchina.cn/ 
+# docs.ceph.com/docs/master/'
 
-
+urlList = urls.split()  # 对字符串用空格分割====产生列表，并能去除空格
+filelist = []
+for url in urlList:
+    if url.endswith('.gz') and url.startswith('www'):   # 判断列表每项以www开头和以。gz结尾
+        filelist.append(url.split('/')[-1])     # 再以/分割，产生列表，取列表最后一项，并append到新列表中
+print(sorted(filelist))     # 对新列表进行sort排序
+'''
 
 
 

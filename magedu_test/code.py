@@ -679,7 +679,18 @@ import random
 c = ['{:04}.{}'.format(i, ''.join(random.choices(string.ascii_lowercase, k=10))) for i in range(1, 101)]
 print(c)
 '''
-
+# 简单交换排序
+'''
+a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
+length = len(a)
+for i in range(length-1):
+    maxindex = i
+    for j in range(i+1, length):
+        if a[j] > a[maxindex]:
+            maxindex = j
+    a[i], a[maxindex] = a[maxindex], a[i]
+print(a)
+'''
 
 
 

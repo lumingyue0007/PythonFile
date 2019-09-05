@@ -427,9 +427,6 @@ for i in range(length-1):  # 循环列表长度-1次，总循环次数，（循�
     for j in range(length-1-i):     # 每次交换后，末尾的数就不需要比较，即每次循环后，次数-1，即-i
         if lst[j] > lst[j+1]:
             lst[j+1], lst[j] = lst[j], lst[j+1]
-            # tmp = lst[j+1]    # 交换结构写法如上
-            # lst[j+1] = lst[j]
-            # lst[j] = tmp
             flag = 1
     if not flag:    # 增加标志位，当一个循环后，没有出现数据交换，即表示数据顺序符合排序要求***************************
         break
@@ -679,7 +676,7 @@ import random
 c = ['{:04}.{}'.format(i, ''.join(random.choices(string.ascii_lowercase, k=10))) for i in range(1, 101)]
 print(c)
 '''
-# 简单交换排序
+# 简单选择排序
 '''
 a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
 length = len(a)
@@ -692,7 +689,7 @@ for i in range(length-1):
         a[i], a[maxindex] = a[maxindex], a[i]
 print(a)
 '''
-# 简单交换排序升级===找最大值得同时，也找最小值，一个正索引查找，一个负索引查找
+# 简单选择排序升级===找最大值得同时，也找最小值，一个正索引查找，一个负索引查找
 '''
 import random
 a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
@@ -741,7 +738,30 @@ for url in urlList:
         filelist.append(url.split('/')[-1])     # 再以/分割，产生列表，取列表最后一项，并append到新列表中
 print(sorted(filelist))     # 对新列表进行sort排序
 '''
+# 输入一个数字，打印相应的图形======计算最长一行的思想，避免重复计算
+'''
+# 思路一，下计算出最长的一行，然后依次从该行中取数
+n = 12
+charlist = [str(i) for i in range(1, n+1)]
+strlength = len(' '.join(charlist))
+print(charlist)
+for i in range(1, n+1):
+    print('{:>{}}'.format(' '.join([charlist[i] for i in range(i-1, -1, -1)]), strlength))
+    # print(' '.join([charlist[i] for i in range(i)]))
 
+# 切片思想
+n = 12
+tail = [str(i) for i in range(1, n+1)]
+for i in range(1, n+1):
+    print(' '.join(tail[:i]))
+
+n = 12
+tail = [str(i) for i in range(n, 0, -1)]
+strlength = len(' '.join(tail))
+for i in range(n):
+    print('{:>{}}'.format(' '.join(tail[i:]), strlength))
+print(tail)
+'''
 
 
 

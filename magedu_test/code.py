@@ -742,9 +742,40 @@ for url in urlList:
 print(sorted(filelist))     # 对新列表进行sort排序
 '''
 
-
-
-
+# n的阶乘，递归写法
+ '''
+def fac(n):
+    return n if n == 1 else n*fac(n-1)
+print(fac(5))
+'''
+# 将输入的数字倒序打印====>数学公式处理
+'''
+def fn(num, rel=None):
+    if rel == None:
+        rel = []
+    x, y = divmod(num, 10)
+    rel.append(y)
+    if x == 0:
+        return rel
+    return fn(x, rel)
+print(fn(1234))
+将输入的数字倒序打印====>字符串，切片处理
+def fn(st, rel=[]):
+    if st == '':
+        return rel
+    rel.append(st[-1])
+    return fn(st[:-1])
+print(fn('1234'))
+'''
+# 猴子摘逃递归方法
+'''
+def peach(days):
+ if days == 1:
+  return 1
+ else:
+  return (peach(days - 1) + 1) * 2
+print(peach(10))
+'''
 
 
 

@@ -427,9 +427,6 @@ for i in range(length-1):  # 循环列表长度-1次，总循环次数，（循�
     for j in range(length-1-i):     # 每次交换后，末尾的数就不需要比较，即每次循环后，次数-1，即-i
         if lst[j] > lst[j+1]:
             lst[j+1], lst[j] = lst[j], lst[j+1]
-            # tmp = lst[j+1]    # 交换结构写法如上
-            # lst[j+1] = lst[j]
-            # lst[j] = tmp
             flag = 1
     if not flag:    # 增加标志位，当一个循环后，没有出现数据交换，即表示数据顺序符合排序要求***************************
         break
@@ -679,7 +676,7 @@ import random
 c = ['{:04}.{}'.format(i, ''.join(random.choices(string.ascii_lowercase, k=10))) for i in range(1, 101)]
 print(c)
 '''
-# 简单交换排序
+# 简单选择排序
 '''
 a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
 length = len(a)
@@ -692,7 +689,7 @@ for i in range(length-1):
         a[i], a[maxindex] = a[maxindex], a[i]
 print(a)
 '''
-# 简单交换排序升级===找最大值得同时，也找最小值，一个正索引查找，一个负索引查找
+# 简单选择排序升级===找最大值得同时，也找最小值，一个正索引查找，一个负索引查找
 '''
 import random
 a = [4, 7, 5, 6, 0, 9, 2, 1, 3, 8]
@@ -741,12 +738,29 @@ for url in urlList:
         filelist.append(url.split('/')[-1])     # 再以/分割，产生列表，取列表最后一项，并append到新列表中
 print(sorted(filelist))     # 对新列表进行sort排序
 '''
+# 输入一个数字，打印相应的图形======计算最长一行的思想，避免重复计算
+'''
+# 思路一，计算出最长的一行，然后依次从该行中取数
+n = 12
+charlist = [str(i) for i in range(1, n+1)]
+strlength = len(' '.join(charlist))
+print(charlist)
+for i in range(1, n+1):
+    print('{:>{}}'.format(' '.join([charlist[i] for i in range(i-1, -1, -1)]), strlength))
+    # print(' '.join([charlist[i] for i in range(i)]))
 
-# n的阶乘，递归写法
- '''
-def fac(n):
-    return n if n == 1 else n*fac(n-1)
-print(fac(5))
+# 切片思想
+n = 12
+tail = [str(i) for i in range(1, n+1)]
+for i in range(1, n+1):
+    print(' '.join(tail[:i]))
+
+n = 12
+tail = [str(i) for i in range(n, 0, -1)]
+strlength = len(' '.join(tail))
+for i in range(n):
+    print('{:>{}}'.format(' '.join(tail[i:]), strlength))
+print(tail)
 '''
 # 将输入的数字倒序打印====>数学公式处理
 '''
@@ -759,7 +773,7 @@ def fn(num, rel=None):
         return rel
     return fn(x, rel)
 print(fn(1234))
-将输入的数字倒序打印====>字符串，切片处理
+# 将输入的数字倒序打印====>字符串，切片处理
 def fn(st, rel=[]):
     if st == '':
         return rel
@@ -770,19 +784,48 @@ print(fn('1234'))
 # 猴子摘逃递归方法
 '''
 def peach(days):
- if days == 1:
-  return 1
- else:
-  return (peach(days - 1) + 1) * 2
+    if days == 1:
+        return 1
+    else:
+        return (peach(days - 1) + 1) * 2
 print(peach(10))
 '''
+# 阶乘的递归写法
+'''
+def fac(n):
+    return n if n == 1 else n*fac(n-1)
+print(fac(5))
+'''
+# 将字典扁平化
+'''
+src = {'a':{'b':1, 'c':2}, 'd':{'e':3, 'f':{'g':4}}}
+def fx(src:dict, prefix='', target={}):        # {'d':{'e':3, 'f':{'g:4'}}} prefix=''  # v={'e':3, 'f':{'g:4'}} p=d.   # v={'g:4'} p=d.f.
+    if target is None:
+        target = {}
+    for k, v in src.items():        # k=d v={'e':3, 'f':{'g:4'}}            # k=e v=3   # k=f v={'g:4'}     # k=g v=4
+        if isinstance(v, dict):
+            prefix += k + '.'       # p=d.                                  #           # p=d.f.
+            fx(v, prefix)           # v={'e':3, 'f':{'g:4'}} p=d.                       # v={'g:4'} p=d.f.
+        else:
+            target[prefix + k] = v  #                                       # t[d.e]=3                      # t[d.f.g]=4
+    return target
+print(fx(src))
+'''
+# 装饰器范例
+'''
+def logger(fn):
+    def _logger(*args, **kwargs):
+        print('fn={}, x={}, y={}'.format(fn.__name__, *args))
+        ret = fn(*args, **kwargs)
+        return ret
+    return _logger
 
+@logger # add = logger(add)  嵌套函数闭包
+def add(x, y):
+    return x + y
 
-
-
-
-
-
+print(add(1, 5))
+'''
 
 
 

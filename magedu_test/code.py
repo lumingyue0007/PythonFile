@@ -761,6 +761,11 @@ strlength = len(' '.join(tail))
 for i in range(n):
     print('{:>{}}'.format(' '.join(tail[i:]), strlength))
 print(tail)
+# n的阶乘，递归写法
+ '''
+def fac(n):
+    return n if n == 1 else n*fac(n-1)
+print(fac(5))
 '''
 # 将输入的数字倒序打印====>数学公式处理
 '''
@@ -819,7 +824,13 @@ def logger(fn):
         ret = fn(*args, **kwargs)
         return ret
     return _logger
-
+n = 12
+tail = [str(i) for i in range(n, 0, -1)]
+strlength = len(' '.join(tail))
+for i in range(n):
+    print('{:>{}}'.format(' '.join(tail[i:]), strlength))
+print(tail)
+'''
 @logger # add = logger(add)  嵌套函数闭包
 def add(x, y):
     return x + y

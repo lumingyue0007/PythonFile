@@ -761,7 +761,92 @@ strlength = len(' '.join(tail))
 for i in range(n):
     print('{:>{}}'.format(' '.join(tail[i:]), strlength))
 print(tail)
+<<<<<<< HEAD
 '''
+=======
+<<<<<<< HEAD
+'''
+# n的阶乘，递归写法
+'''
+=======
+# n的阶乘，递归写法
+ '''
+>>>>>>> 15d5daaac3a06b21e802a7d550532682268cc990
+def fac(n):
+    return n if n == 1 else n*fac(n-1)
+print(fac(5))
+'''
+# 将输入的数字倒序打印====>数学公式处理
+'''
+def fn(num, rel=None):
+    if rel == None:
+        rel = []
+    x, y = divmod(num, 10)
+    rel.append(y)
+    if x == 0:
+        return rel
+    return fn(x, rel)
+print(fn(1234))
+# 将输入的数字倒序打印====>字符串，切片处理
+def fn(st, rel=[]):
+    if st == '':
+        return rel
+    rel.append(st[-1])
+    return fn(st[:-1])
+print(fn('1234'))
+'''
+# 猴子摘逃递归方法
+'''
+def peach(days):
+    if days == 1:
+        return 1
+    else:
+        return (peach(days - 1) + 1) * 2
+print(peach(10))
+'''
+# 阶乘的递归写法
+'''
+def fac(n):
+    return n if n == 1 else n*fac(n-1)
+print(fac(5))
+'''
+# 将字典扁平化
+'''
+src = {'a':{'b':1, 'c':2}, 'd':{'e':3, 'f':{'g':4}}}
+def fx(src:dict, prefix='', target={}):        # {'d':{'e':3, 'f':{'g:4'}}} prefix=''  # v={'e':3, 'f':{'g:4'}} p=d.   # v={'g:4'} p=d.f.
+    if target is None:
+        target = {}
+    for k, v in src.items():        # k=d v={'e':3, 'f':{'g:4'}}            # k=e v=3   # k=f v={'g:4'}     # k=g v=4
+        if isinstance(v, dict):
+            prefix += k + '.'       # p=d.                                  #           # p=d.f.
+            fx(v, prefix)           # v={'e':3, 'f':{'g:4'}} p=d.                       # v={'g:4'} p=d.f.
+        else:
+            target[prefix + k] = v  #                                       # t[d.e]=3                      # t[d.f.g]=4
+    return target
+print(fx(src))
+'''
+# 装饰器范例
+'''
+def logger(fn):
+    def _logger(*args, **kwargs):
+        print('fn={}, x={}, y={}'.format(fn.__name__, *args))
+        ret = fn(*args, **kwargs)
+        return ret
+    return _logger
+n = 12
+tail = [str(i) for i in range(n, 0, -1)]
+strlength = len(' '.join(tail))
+for i in range(n):
+    print('{:>{}}'.format(' '.join(tail[i:]), strlength))
+print(tail)
+<<<<<<< HEAD
+=======
+'''
+>>>>>>> 15d5daaac3a06b21e802a7d550532682268cc990
+@logger # add = logger(add)  嵌套函数闭包
+def add(x, y):
+    return x + y
+>>>>>>> 577c0d707210c4e0810c37dced5c360f72487c3b
 
 
 

@@ -839,14 +839,11 @@ strlength = len(' '.join(tail))
 for i in range(n):
     print('{:>{}}'.format(' '.join(tail[i:]), strlength))
 print(tail)
-<<<<<<< HEAD
-=======
-'''
->>>>>>> 15d5daaac3a06b21e802a7d550532682268cc990
+
 @logger # add = logger(add)  嵌套函数闭包
 def add(x, y):
     return x + y
->>>>>>> 577c0d707210c4e0810c37dced5c360f72487c3b
+
 
 
 
